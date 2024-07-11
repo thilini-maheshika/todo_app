@@ -10,7 +10,7 @@ app.use(express.json());
 app.use(function (req, res, next) {
     const allowedOrigins = [
         'http://localhost:3000',
-	'https://todo-app-nine-brown.vercel.app/',
+        'https://todo-frontend-orpin.vercel.app/'
     ];
 
     const origin = req.headers.origin;
