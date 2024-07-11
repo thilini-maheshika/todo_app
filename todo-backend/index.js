@@ -8,7 +8,8 @@ const routeHandler = require('./src/routes/index');
 // Setup CORS
 const allowedOrigins = [
     'http://localhost:3000',
-    'https://todo-frontend-orpin.vercel.app'
+    'https://todo-frontend-orpin.vercel.app',
+    'https://todo-jfptnswrg-thilini-maheshikas-projects.vercel.app'
 ];
 
 app.use(cors({
@@ -20,13 +21,21 @@ app.use(cors({
             return callback(new Error('Not allowed by CORS'));
         }
     },
-    methods: 'GET,POST,PUT,DELETE',
+    methods: 'GET,POST,PUT,DELETE,OPTIONS',
     allowedHeaders: 'Content-Type,Authorization,x-token',
     credentials: true // Allow cookies and authorization headers
 }));
 
 app.use(express.urlencoded({ extended: true }));
 app.use(express.json());
+
+// Handle preflight requests
+app.options('*', (req, res) => {
+    res.header('Access-Control-Allow-Origin', req.headers.origin);
+    res.header('Access-Control-Allow-Methods', 'GET,POST,PUT,DELETE,OPTIONS');
+    res.header('Access-Control-Allow-Headers', 'Content-Type, Authorization, x-token');
+    res.sendStatus(204);
+});
 
 app.use('/api', routeHandler(config));
 
