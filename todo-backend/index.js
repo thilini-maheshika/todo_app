@@ -1,27 +1,32 @@
 const db = require('./config/db');
 const config = require('./config/config');
 const express = require('express');
+const cors = require('cors');
 const app = express();
 const routeHandler = require('./src/routes/index');
 
+// Setup CORS
+const allowedOrigins = [
+    'http://localhost:3000',
+    'https://todo-frontend-orpin.vercel.app'
+];
+
+app.use(cors({
+    origin: function (origin, callback) {
+        if (!origin) return callback(null, true); // Allow non-web browser clients
+        if (allowedOrigins.includes(origin)) {
+            return callback(null, true);
+        } else {
+            return callback(new Error('Not allowed by CORS'));
+        }
+    },
+    methods: 'GET,POST,PUT,DELETE',
+    allowedHeaders: 'Content-Type,Authorization,x-token',
+    credentials: true // Allow cookies and authorization headers
+}));
+
 app.use(express.urlencoded({ extended: true }));
 app.use(express.json());
-
-app.use(function (req, res, next) {
-    const allowedOrigins = [
-        'http://localhost:3000',
-        'https://todo-frontend-orpin.vercel.app/'
-    ];
-
-    const origin = req.headers.origin;
-    if (allowedOrigins.includes(origin)) {
-        res.header('Access-Control-Allow-Origin', origin);
-    }
-
-    res.header('Access-Control-Allow-Methods', 'GET, POST, PUT, DELETE');
-    res.header('Access-Control-Allow-Headers', 'Content-Type, Authorization, x-token'); // Include 'x-token' header
-    next();
-});
 
 app.use('/api', routeHandler(config));
 
