@@ -1,0 +1,54 @@
+.App {
+    text-align: center;
+  }
+  
+  .todo-list {
+    max-width: 400px;
+    margin: 0 auto;
+    padding: 20px;
+    background: #f9f9f9;
+    border-radius: 10px;
+    box-shadow: 0 0 10px rgba(0,0,0,0.1);
+  }
+  
+  .add-task {
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 20px;
+  }
+  
+  .add-task .MuiTextField-root {
+    flex: 1;
+    margin-right: 10px;
+  }
+  
+  .add-task .MuiButton-root {
+    height: 56px;
+  }
+
+  h1 {
+    text-align: center;
+    margin-top: 20px;
+    color: #333;
+  }
+  
+  .MuiContainer-root {
+    padding-top: 20px;
+  }
+  
+  .MuiTextField-root {
+    margin-bottom: 10px;
+  }
+  
+  .MuiButton-root {
+    margin-bottom: 20px;
+  }
+  
+  .MuiGrid-root {
+    padding: 0 20px;
+  }
+  
+  .MuiTypography-h6 {
+    text-align: center;
+  }
+  
